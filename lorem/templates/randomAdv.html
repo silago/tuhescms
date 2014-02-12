@@ -1,0 +1,9 @@
+{% for adv in advs %}
+	
+	
+	<div class="radv">
+		
+		<img src="/media/{{ adv.mainPhoto }}">
+		<h6><a  href="/advertisment/{{ adv.id }}/">{{ adv.title }}</a></h6>
+	</div>
+{% endfor %}

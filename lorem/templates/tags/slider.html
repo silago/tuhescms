@@ -1,0 +1,10 @@
+<ul data-orbit="" class="orbit-slides-container">
+{% for slide in list %}
+	<li>	
+		<img src="{{ slide.image.url }}">
+		<div class="orbit-caption">
+			{{ slide.text }}
+		</div>
+	</li>
+{% endfor %}
+</ul>

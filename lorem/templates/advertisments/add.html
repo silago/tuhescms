@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block foundation_body %}
+{% load category_tags %}
+<style>
+.cat {display:none;}
+</style>
+
+<script type='text/javascript'>
+$(document).ready( function() {
+$('#id_category').on('change', function() {
+					$('.cat').hide();
+					$('.cat'+this.value).show();
+					  //alert( '.cat'+this.value ); // or $(this).val()
+					});
+});					
+</script>
+	
+	
+		
+		
+	
+	<div class="columns large-7">
+		
+			<form enctype="multipart/form-data"  
+action="/advertisments/add/" method="post">
+			{% csrf_token %}
+			  <fieldset>
+				<legend>Добавление объявления</legend>
+				
+				<div class="row collapse">
+					 {% for field in form %}
+						<div class="small-2 columns">
+						<span class="left prefix"
+							{{ field.label_tag }}
+						</span>
+						</div>
+						
+						<div class="small-10 columns">
+						{{ field }}
+						</div>
+					 {% endfor %}
+						<h6> Дополнительные поля </h6>
+					{% for field in additionalFields %}
+					<div class="cat  {% for i in field.category.all %}cat{{ i.id }} {% endfor %} row collapse">
+					<div class="small-2 columns">
+						<span class="left prefix">
+							{{ field.name }}
+						</span>	
+					</div>
+					<div class="small-10 columns">
+						<input type=text name='additionalField{{ field.id }}'>
+					</div>
+					</div>
+					{% endfor %}
+				
+					<!--
+					<div class="small-2 columns">
+						<span class="left prefix">Город</span>
+					</div>
+					<div class="small-10 columns">
+						<input type="text" placeholder="">
+					</div>
+					<div class="small-2 columns">
+						<span class="left prefix">Категория</span>
+					</div>
+					<div class="small-10 columns">
+						<input type="text" placeholder="">
+					</div>
+					<div class="small-2 columns">
+						<span class="left prefix">Заголовок</span>
+					</div>
+					<div class="small-10 columns">
+						<input type="text" placeholder="">
+					</div>
+					<div class="small-2 columns">
+						<span class="left prefix">Фото</span>
+					</div>
+					<div class="small-10 columns">
+						<input type="text" placeholder="">
+					</div>
+					<div class="small-12 columns">
+						<textarea> </textarea>
+					</div>-->
+					
+					
+					
+					<div class="small-2 columns">
+						<input type="submit" class="button prefix" value="Разместить">
+					</div>
+				</div>
+			  </fieldset>
+			</form>
+		
+	</div>
+	
+
+
+
+{% endblock foundation_body %}
+

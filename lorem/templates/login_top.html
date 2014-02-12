@@ -1,0 +1,18 @@
+{% if request.user %}
+	<li class="has-dropdown"><a href="/profile/{{ request.user }}/">{{ request.user }}</a>
+	
+	
+	<ul class="dropdown">	
+		{% if request.user.id %}	
+		<li><a href="/accounts/logout/"> Выход </a> </li>
+		{% else %}
+		<li>
+								<a href="/accounts/login/"> Вход </a>
+							</li>
+							<li><a href="/accounts/register/">Регистрация</a></li>
+		{% endif %}
+	</ul>
+	</li>
+	
+
+{% endif %}

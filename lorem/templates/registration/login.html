@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block foundation_body %}
+	
+	
+	<div class="columns large-4">
+		<p>
+				{% if user.is_authenticated %}
+				Зачем вы здесь, {{ user.username }} ? Вы же уже авторизорваны.
+				<br/>
+				Но можно <a href="/accounts/logout/">выйти</a>.<br/><br/>
+				{% else %}
+				
+				<form method="post" action="">
+				{% csrf_token %}
+			    <fieldset>
+				<legend>Регистрация</legend>
+				{% for field in form %}
+					<div class="small-5 large-5 columns">
+								<span class="left prefix">
+				    {{ field.label_tag }}
+								</span>
+					</div>
+					
+					
+					<div class="small-7 large-7 columns">
+						{{ field }}
+					</div>				
+					
+				{% endfor %}
+				</fieldset>
+				<input type="submit" value="Вход" / class="clearfix">
+				</form>
+				{% endif %}
+		</p>		
+	</div>
+	
+
+{% endblock foundation_body %}

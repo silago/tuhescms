@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load category_tags %}
+{% block foundation_body %}
+
+	
+
+		
+	
+	<div class="columns large-7">
+		
+		{% for item in items %}
+			<div class='columns large-12 panel'>
+				<h6> {{ item.title }} </h6>
+				<div class='columns large-2'>
+					<a class="fancybox" title="{{ item.title }}" rel="group" href="/media/{{ item.mainPhoto }}"><img title="{{ item.title }}" src="{{ item.mainPhoto.url_300x300 }}" alt="{{ item.title }}" /></a>
+				</div>
+				<div class='columns small-10'>
+					<small>{{ item.text }}</small>
+						<br/>
+						<br/>
+						<a href="/catalog/items/{{ item.id }}/">Подробрнее</a>
+					</div>
+			</div>
+		{% endfor %}
+		
+		
+		
+		
+	<ul class="pagination">
+		<li class="arrow {% if offset = '0' %}unavailable {% endif %}"><a href="?page={{ offset|add:-1 }}">&laquo;</a></li>
+		
+		{% for i in count %}
+		
+			{% if count|length > 10 and i > 4   %}			
+				{% if offset = i %}
+					<li class="current"><a href="#">{{ i }}</a></li>
+				{% else %}			
+		
+						{% if i|add:3 > count|length %}
+							<li class=""><a href="?page={{ i }}">{{ i }}</a></li>
+						{% endif %}
+					
+				{% endif %}
+				
+							{% if count|length > 10 and i = 5  %}
+					 <li class="unavailable"><a href="#">&hellip;</a></li>
+					{% endif %}
+			{% else %}
+			
+			<li class="{% if i = offset %}current {% endif %}"><a href="?page={{ i }}">{{ i }}</a></li>
+			
+			{% endif %}
+		{% endfor %}
+		<li class="arrow {% if offset = count|last %}unavailable {% endif %}"><a href="?page={{ offset|add:1 }}">&raquo;</a></li>
+	</ul>
+
+	</div>
+	
+		
+
+
+{% endblock foundation_body %}

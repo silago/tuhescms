@@ -1,0 +1,91 @@
+# -*- coding: utf-8 -*-
+from django.db import models
+from django.contrib.auth.models import User
+from django_thumbs.db.models import ImageWithThumbsField
+from autoslug.fields import AutoSlugField
+#для миграций превьюшек
+from south.modelsinspector import add_introspection_rules
+from django.forms import ModelForm
+#from myadpp.models import Article
+
+
+
+#from lib.thumbs import ImageWithThumbsField
+if 1:
+    add_introspection_rules([
+        (
+            [ImageWithThumbsField], # Class(es) these apply to
+            [],         # Positional arguments (not used)
+            {           # Keyword argument
+                "sizes": ["sizes", {}],
+            },
+        ),
+    ], ["^django_thumbs\.db\.models\.ImageWithThumbsField"])
+
+
+
+class City(models.Model):
+	name = models.CharField(max_length=255)
+	def __unicode__(self):
+		return self.name
+
+class AdvertismentCategory(models.Model):
+	name		=	models.CharField(max_length=255)
+	alias		=	AutoSlugField(populate_from='name', default='0', unique=True)
+	def __unicode__(self):
+		return self.name	
+
+class CategoryField(models.Model):
+	name		=	models.CharField(max_length=255)
+	title		=	models.CharField(max_length=255, blank=True)
+	category	=	models.ManyToManyField(AdvertismentCategory,)
+	hidden		=	models.IntegerField(choices = ((0,'Скрыто для всех'),(1,'Открыто для подтвержденных'),(2,'Открыто для всех')))
+	def __unicode__(self):
+		return self.name
+
+
+class Advertisment(models.Model):
+	owner	 	= 	models.ForeignKey(User,)
+	city		=	models.ForeignKey(City,)
+	category	=	models.ForeignKey(AdvertismentCategory, )
+	mainPhoto	=	ImageWithThumbsField(upload_to='images', sizes=((125,125),(300,300)), blank=True)
+	title		=	models.CharField(max_length=255,)
+	#alias		=	AutoSlugField(populate_from=title)
+	text		=	models.TextField(max_length=255,)
+	price		=	models.CharField(max_length=255,blank = True)
+	typeof		=	models.CharField(max_length=255, choices = (('have','У меня есть'),('need','Я ищу')))
+	date		=	models.DateTimeField(auto_now_add = True)
+	rate		=	models.IntegerField(blank=True, default=5)
+	status		=	models.IntegerField(choices = ((-1,'Неактивно'),(0,'Не оплачено'),(1,'Оплачено')), default=0)
+	def __unicode__(self):
+		return self.title
+		
+    
+
+class AdvertismentImage(models.Model):
+	adv			=	models.ForeignKey(Advertisment,)
+	image		=	ImageWithThumbsField(upload_to='images', sizes=((125,125),(300,300)))	
+
+
+class AdvertismentFieldValues(models.Model):
+	adv			=	models.ForeignKey(Advertisment,)
+	field		=	models.ForeignKey(CategoryField,)
+	value		=	models.CharField(max_length=255,)
+
+
+class AdvertismentForm(ModelForm):
+	class Meta:
+		model	=	Advertisment
+		fields	=	['city','category','mainPhoto','title','text','price']
+	
+	#def __init__(self, *args, **kwargs):
+	#	self._user = kwargs.pop('user')
+	#	super(ReviewForm, self).__init__(*args, **kwargs)
+	#
+	#def save(self, commit=True):
+	#	inst = super(AdvertismentForm, self).save(commit=False)
+	#	inst.owner = self._user
+	#	if commit:
+	#		inst.save()
+	#		self.save_m2m()
+	#	return inst

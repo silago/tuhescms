@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block foundation_body %}
+
+	
+	<style type="text/css">
+	div.error2   small {color:#fff; background-color:#C60F13; display:block; }
+	div.error2  > span {padding:10px; color:#fff; background-color:#C60F13; display:block; }
+	div.error2  div {border:1px solid #C60F13;}
+	</style>
+
+	
+	<div class="columns large-4">
+		
+			<form method="post" action="">
+			 	{% csrf_token %}
+			     	<fieldset>
+				<legend>Регистрация</legend>
+						<input type=hidden name=login value={{ login }}/>
+						<div class="row collapse {% if field.errors %} error2 {% endif %}">
+							<div class=" small-5 large-5 columns ">
+								<span class="left prefix">
+									Введите код подтверждения
+								</span>
+							</div>
+						
+							<div class=" small-7 large-7 columns">
+								<input type=text name=code/>
+							</div>
+							{% if form.error %}
+								 <small class="error">Введенный вами код неверен.</small>
+							{% endif %}							
+							
+						</div>	
+					
+					<div class="row collapse">
+						 <div class="small-5 large-5 columns">
+							<input type="submit" value="Зарегистрироваться" / class=" button small clearfix">
+						</div>
+						<div class="small-7 pa10 large-7 columns">
+							
+								<small> Нажимая кнопку "Зарегистрироваться" вы <br/> принимаете правила пользовательского соглашения *</small>
+							
+							
+						</div>
+					</div>
+					
+			  </fieldset>
+			</form>
+		
+	</div>
+	
+
+
+
+{% endblock foundation_body %}

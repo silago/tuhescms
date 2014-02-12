@@ -1,0 +1,11 @@
+	
+	  	{% for item in list %}  
+			<li cLASS="mm" >n<a href="">n</a>
+			{% with "list_menu.html" as filename %}  
+			{% with item.children as list %}  
+			<ul>  
+				{% include filename %}  
+			</ul>  
+			{% endwith %}  
+			{% endwith %}</li>  
+		{% endfor %}  

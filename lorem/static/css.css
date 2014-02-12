@@ -1,0 +1,25 @@
+		.left {text-align:left;}
+		.right {text-align:right;}
+		.left, .right {padding-left:10px;}
+		.columns form  .row .pa10 {padding-left:10px;}
+		.footer {background-color:#333; margin-top:20px;}
+		.footer hr {background-color:#666; border:1px solid #666;}
+		.footer  {color:#666666; padding-top:20px; text-transform:uppercase;}
+		.footer a {color:#666666;}
+		.footer a:hover {color:#999999;}
+		.footer ul li  {float:left; list-style:none; padding-right:20px;}
+		
+		body {background-color:#FeFeFe;}
+		.radv {position:relative; margin-bottom:-40px;}
+		.radv h6 {  background-color: #131313;
+			bottom: 43px;
+			opacity: 0.8;
+			padding: 10px; border-radius:5px;
+			position: relative;
+			width: 100%;}
+				.radv img {border-radius:5px;}
+		
+		.side-nav {padding:20px; border:1px solid lightblue; border-radius:5px; margin-bottom:20px;}
+		zbody {background:none repeat scroll 0 0 #EEEEEE;}
+		z.row {background: none repeat scroll 0 0 #fff; padding:10px; padding-top:50px; margin-top:-30px;}
+		.profile_replyies .panel {display:none;}

@@ -1,0 +1,16 @@
+
+   
+  
+    {% for category in list %}  
+        <li {% if "/category/"|add:category.alias|add:"/" == url %} class='active' {% endif %}><a href="/category/{{ category.alias }}/">{{ category.name }}</a>
+
+        {% with "category_list.html" as filename %}  
+        {% with category.children as list %}  
+			  <ul>  
+				{% include filename %}  
+			   </ul>  
+        {% endwith %}  
+        {% endwith %}</li>  
+    {% endfor %}  
+   
+

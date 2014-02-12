@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load category_tags %}
+{% block foundation_body %}
+
+	
+	
+	<div class="columns large-2">
+	
+				<ul class="side-nav">
+					
+					<li class="title"><strong>
+					
+ 					Разделы объявления</strong></li>
+					<li class="divider"></li>
+					{% categoryList %}					
+				</ul>
+				<ul class="side-nav">
+					
+					<li class="title"><strong>Города</strong></li>
+					<li class="divider"></li>
+					{% citiesList %}				
+				</ul>
+		</div>
+		</div>
+		
+		
+	
+	<div class="columns large-8">
+		<script>
+			document.location='/';
+		</script>
+		
+	</div>
+	
+	<div class="columns large-2">
+		<div class="panel">
+			Здесь могла бы быть ваша реклама
+		</div>
+	</div>
+
+
+
+
+{% endblock foundation_body %}

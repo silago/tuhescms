@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block foundation_body %}
+
+	
+	<style type="text/css">
+	div.error2   small {color:#fff; background-color:#C60F13; display:block; }
+	div.error2  > span {padding:10px; color:#fff; background-color:#C60F13; display:block; }
+	div.error2  div {border:1px solid #C60F13;}
+	</style>
+
+	
+	<div class="columns large-4">
+		
+			<form method="post" action="">
+			 	{% csrf_token %}
+			     	<fieldset>
+				<legend> Обратная связь </legend>
+				 {% if form.error %}
+					<div class="row collapse  error2">
+							<span>{{ form.error }}</span>
+					</div>
+				{% endif %}		  
+				    {% for field in form %}
+					
+						<div class="row collapse {% if field.errors %} error2 {% endif %}">
+							<div class=" small-5 large-5 columns ">
+								
+								<span class="left prefix">
+									{{ field.label_tag }}
+								</span>
+							
+								
+							
+							</div>
+						
+							<div class=" small-7 large-7 columns">
+								{{ field }}
+							</div>
+							{% if field.errors %}  
+								 <small class="error">{{ field.errors }}</small>
+							{% endif %}
+							{% if field.help_text %}<small>field.help_text }}</small>{% endif %}
+							
+						</div>	
+					{% endfor %}
+					<div class="row collapse">
+					<h6>А не робот ли ты, часои? </h6>
+					<div class="small-5 large-5 columns">
+						<span class="left prefix">
+						<img src="/media/{{ capcha.tempname }}">
+						</span>
+					</div>
+					<div class=" small-7 large-7 columns">
+							<input type="text" size="20" name="imgtext">
+					</div>
+
+					</div>
+					
+					<div class="row collapse">
+						 <div class="small-5 large-5 columns">
+							<input type="submit" value="Продолжить" / class=" button small clearfix">
+						</div>
+						<div class="small-7 pa10 large-7 columns">
+							
+							
+							
+						</div>
+					</div>
+					
+			  </fieldset>
+			</form>
+		
+	</div>
+	
+
+
+
+{% endblock foundation_body %}

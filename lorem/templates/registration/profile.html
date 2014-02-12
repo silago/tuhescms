@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load category_tags %}
+{% block foundation_body %}
+
+	
+	
+
+		
+		
+	
+	<div class="columns large-7">
+		
+		
+			<div class='columns large-12'>
+				<strong>{{ item.username }}</strong>
+			
+				 <small>Дата регистрации: {{item.date_joined}}</small>
+				<br/><hr/>
+			</div>
+			
+				
+				{% if item.userwarring %}
+				<div class='columns large-12 profile_replyies'>
+					 <strong><a href='#' onclick="$(this).parent().parent().children('.panel').toggle();">Отзывы о пользователе >> </a></strong><br/><br/>
+				
+					{% for war in item.userwarring %}
+					<div class="panel">
+						<small>	{{ war.author.username }} :
+						
+						
+							{{ war.reason }}</small> </div>
+						{% endfor %} 
+					</div>	
+				{% endif %}
+				
+				<div class='columns large-12'>
+				 <strong><a href='#' onclick="$(this).parent().parent().children('.panel').toggle();">Объявления пользователя >> </a></strong><br/><br/>
+				
+					{% for adv in item.advertisments %}
+					<div class="panel">
+							{{ adv.date }} :
+						
+							
+							<a href="/advertisment/{{adv.id}}">{{ adv.title }}</a> 
+							{% if request.user.id == item.id %}
+							| <a href="/advertisment/up/{{adv.id}}/"> &uarr; </a>
+							| <a href="/advertisment/delete/{{adv.id}}/"> &times; </a>
+							|
+							{% endif %}
+				</div>
+						
+					{% endfor %}
+					
+				
+				
+			</div>
+			
+			
+<div class="columns large-12 panel">
+		
+			<form method=GET action="/search/">
+			  <fieldset>
+				<legend>Поиск</legend>
+				<div class="row collapse">
+					<div class="small-10 columns">
+						<input name='s' type="text" placeholder="Текст для поиска">
+					</div>
+					<div class="small-2 columns">
+						<input type="submit" class="button prefix" value="Искать">
+					</div>
+				</div>
+			  </fieldset>
+			</form>
+		
+	</div>
+		
+	</div>
+
+
+
+
+{% endblock foundation_body %}

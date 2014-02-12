@@ -1,0 +1,5 @@
+{% for category in list %}
+	
+	
+	<li {% if category.id == cityId %} class='active' {% endif %}> <a  href="/city/{{ category.id }}/">{{ category.name }}</a></li>
+{% endfor %}

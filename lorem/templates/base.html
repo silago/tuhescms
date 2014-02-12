@@ -1,0 +1,131 @@
+{% load static %} {% load category_tags %} {% load menuz_tags %} {% get_menu some_menu as smenu %} {% get_menu some_menu2 as smenu2 %} {% get_menu left_menu as lmenu %} <!DOCTYPE html>
+<!--[if IE 8]> <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width"/>
+ {% block meta %}{% endblock %} {% block base_title %} <title>{% block title %}www.lorem.com{% endblock %}</title>
+{% endblock base_title %} {# Base Foundation CSS #} {% block foundation_css %}
+<link rel="stylesheet" href="{% static 'foundation/css/normalize.css' %}"/>
+<link rel="stylesheet" href="{% static 'foundation/css/foundation.min.css' %}"/>
+ {% endblock foundation_css %} {# Custom CSS #} {% block css %}{% endblock %} {# Override if you need another version of modernizr #} {% block foundation_modernizer %}
+<script src="{% static 'foundation/js/vendor/custom.modernizr.js' %}"></script>
+ {% endblock foundation_modernizer %} {# Custom head JS #} {% block head_js %}{% endblock head_js %}
+<script type="text/javascript" src="/static/jqmin.js"></script>
+<link rel="stylesheet" href="{% static 'css.css' %}"/>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+</head>
+<body {% block body_attr %}{% endblock body_attr %}>
+ {% block top_nav %} <nav class="top-bar">
+<ul class="title-area">
+	<li class="name">
+	<h1><a href="/">{ Квартиры-Хуиры } </a></h1>
+	</li>
+	<li class="toggle-topbar menu-icon"><a href="#"><span>Меню</span></a></li>
+</ul>
+<section class="top-bar-section">
+<ul class="left">
+	<li class="divider"></li>
+	<li class="active"><a href="/">Главная</a></li>
+	 {% list_menu 'left_menu' %}
+	<li class="divider"></li>
+</ul>
+<!-- Right Nav Section -->
+<ul class="right">
+	 {% loginForm %}
+</ul>
+</section>
+</nav>
+{% endblock top_nav %}
+<div class="columns large-12">
+	<div class="columns large-2">
+		<ul class="side-nav">
+			<li>
+				<h2>{{smenu_title}}</h2>
+				<ul>
+					 {% for itemz in smenu %}
+					<li><a href="{{itemz.url}}">{{itemz.title}} </a></li>
+					 {% endfor %}
+				</ul>
+			</li>
+		</ul>
+		<ul class="side-nav">
+			<h2>{{smenu2_title}}</h2>
+				<li>
+				<ul>
+					 {% for itemz in smenu2 %}
+					<li><a href="{{itemz.url}}">{{itemz.title}} </a></li>
+					 {% endfor %}
+				</ul>
+			</li>
+			
+		</ul>
+		<!--
+				<ul class="side-nav">
+					<li class="title"><strong>Города</strong></li>
+					<li class="divider"></li>
+				</ul>-->
+	</div>
+	<div class="columns large-7">
+		<ul class="breadcrumbs ">
+			<li>
+			<a href="/">
+			Главная </a>
+			</li>
+			 {% if request.breads %} {% for i in request.breads %} {% for i2 in i %}
+			<li>
+			<a href="{{ i2.url }}">
+			{{ i2.name }} </a>
+			</li>
+			 {% endfor %} {% endfor %} {% endif %}
+		</ul>
+	</div>
+	 {# Main content goes here #} {% block foundation_body %}{% endblock foundation_body %}
+	<div class="columns large-3">
+		<div class="">
+			<!--		здесь могла бы быть ваша реклама	 -->
+		</div>
+	</div>
+</div>
+<div class="footer columns large-12">
+	<div class="columns large-2">
+	</div>
+	<div class="row">
+		<div class="large-12 columns">
+			<a class="zurb-logo regular" href="http://www.zurb.com"></a>
+			<br/>
+			<hr/>
+			<p class="copyright">
+				&copy; 2013 company, Inc. All rights reserved.
+			</p>
+		</div>
+	</div>
+	<div class="columns large-3">
+	</div>
+</div>
+ {# Override to specify jQuery or Zepto manually instead of auto select #} {% block foundation_jquery_zepto %}
+<script>
+    document.write('<script src=' +
+        ('__proto__' in {} ? '{% static "foundation/js/vendor/zepto" %}' : '{% static "foundation/js/vendor/jquery" %}') +
+        '.js><\/script>')
+    </script>
+ {% endblock %} {# Foundation JS #} {% block foundation_js %}
+<script src="{% static 'foundation/js/foundation.min.js' %}"></script>
+ {% endblock foundation_js %} {# Custom JS #} {% block body_js %}{% endblock body_js %} {# Init Foundation #} {% block foundation_js_init %}
+<script>
+        $(document).foundation();
+    </script>
+ {% endblock foundation_js_init %}
+<script type="text/javascript" src="/static/jqlatest.js"></script>
+<script type="text/javascript" src="/static/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
+<link rel="stylesheet" href="/static/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen"/>
+<script type="text/javascript" src="/static/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript">
+		$(document).ready(function() {
+			$(".fancybox").fancybox();
+		});
+	</script>
+</body>
+</html>
